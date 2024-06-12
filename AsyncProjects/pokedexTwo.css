@@ -1,0 +1,121 @@
+#container {
+    display: flex;
+}
+
+#hinge {
+    width: 20px;
+    background-color: #d50625;
+    border: 5px;
+    height: 470px;
+    margin-top: 45px;
+}
+
+#pokedexTwo {
+    width: 350px;
+    height: 450px;
+    display: block;
+    margin-top: 70px;
+    background-color: #fc2243;
+    z-index: 3;
+    position: relative;
+}
+
+#hidden {
+    position: absolute;
+    background-color: #fc2243;
+    height: 30px;
+    width: 60%;
+    top: -30px;
+}
+
+#searchBar {
+    background-color: black;
+    display: flex;
+    height: 50px;
+    margin-top: 60px;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+#searchName {
+    width: 90%;
+    border: none;
+    background-color: #404040;
+    color: azure;
+    outline: none;
+    height: 50px;
+    padding-left: 15px;
+    font-size: 1.6rem;
+}
+
+::placeholder {
+    font-size: 1.6rem;
+    margin-left: 5px;
+    color: lightgray;
+}
+
+#searchBtn {
+    color: #fff;
+    background-color: #404040;
+    height: 52px;
+    font-size: 20px;
+}
+
+#sectionTwo {
+    height: 100px;
+    width: 88%;
+    margin: 20px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 5px;
+}
+
+.squares {
+    background-color: aqua;
+}
+
+#sectionThree {
+    height: 70px;
+    margin: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+#twoSquares {
+    width: 100%;
+    display: flex
+}
+
+.two {
+    background-color: beige;
+    width: 60px;
+    margin: 5px;
+}
+
+#bottomYellowBtn {
+    width: 60px;
+    height: 60px;
+    background-color: #ffcf54;
+    margin-right: 30px;
+    margin-top: 10px;
+    border-radius: 50%;
+}
+
+#sectionFour {
+    width: 91%;
+    margin: 15px;
+    display: flex;
+    justify-content: space-between;
+}
+
+#sectionFour .bottomTwo {
+    height: 40px;
+    width: 130px;
+    background-color: #404040;
+}
+
+#pokemonImg {
+    z-index: 10000;
+    width: 100%;
+    height: 100%;
+}
