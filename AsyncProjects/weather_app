@@ -1,0 +1,227 @@
+<!--index.html-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="index.css">
+    <title>Weather API</title>
+</head>
+<body>
+    <div id="app">
+        <!-- Search Bar-->
+         <div id="searchBar">
+            <input type="text" id="searchBarInput" placeholder="Search By City">
+            <button id="searchIcon" onclick="getWeather()" ><i class="fa fa-search" aria-hidden="true"></i></button>
+        </div>
+
+        <!-- Date& City-->
+         <div id="info">
+            <p id="date"></p>
+            <h3 id="city"></h3>
+         </div>
+
+         <!--Weather Image-->
+         <div id="tempImg"></div>
+
+         <!--Description-->
+        <div id="description"></div>
+
+        <!--Temp-->
+        <div id="temp"></div>
+
+            <!-- Info at the bottom -->
+            <div class="extra-info">
+                <div class="col">
+                    <div class="info">
+                        <h5>Highs</h5>
+                        <p id="temp-max"></p>
+                    </div>
+                </div>            
+                <div class="col">
+                    <div class="info">
+                        <h5>Lows</h5>
+                    <p id="temp-min"></p>
+                </div>
+                </div>
+            </div>
+
+    </div>
+    
+</body>
+<script src="app.js"></script>
+</html>
+-----------------------------------------------------------------------------------------------
+<!--index.css-->
+
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Montserrat','sans-serif';
+}
+#app{
+    position: relative;
+    width: 414px;
+    height: 420px;
+    display: block;
+    margin: 20px auto;
+    text-align: center;
+    padding: 40px 0px;
+    overflow: hidden;
+    border-radius: 45px;
+    background-image: linear-gradient(
+        325deg,
+        hsl(240deg 97% 55%) 0%,
+        hsl(240deg 97% 65%) 32%,
+        hsl(240deg 97% 70%) 59%,
+        hsl(240deg 96% 75%) 74%,
+        hsl(240deg 96% 79%) 84%,
+        hsl(240deg 96% 82%) 90%,
+        hsl(240deg 96% 85%) 94%,
+        hsl(240deg 96% 88%) 97%,
+        hsl(240deg 96% 91%) 99%,
+        hsl(240deg 96% 93%) 100%,
+        hsl(240deg 96% 96%) 100%,
+        hsl(240deg 95% 98%) 100%,
+        hsl(0deg 0% 100%) 100%
+    );
+}
+
+#searchBar {
+    display: flex;
+    padding: 0 40px;
+    margin-bottom: 30px;
+
+}
+#searchBarInput{
+    background-color: none;
+    border : none;
+    outline: none;
+
+    width: 90%;
+    background: transparent;
+    color: #fff;
+    border-bottom: solid 1px lightblue;
+
+}
+input ::placeholder{
+    color: #fff;
+    opacity: 0.6;
+}
+
+#searchIcon {
+    border: none;
+    background-color: transparent;
+    color: #fff;
+    font-size: 1.5rem;
+}
+#temperature {
+    background: rgb(206, 206, 206);
+    border-radius: 500px;
+    width: 50px;
+    height: 50px;
+    text-align: center;
+    display: block;
+    margin: auto;
+    box-shadow: 0 30px 20px #1d1d1d36;
+    margin: auto;
+    margin-top: 30px;
+    margin-bottom: 300px;
+}
+
+#temp-img {
+    margin-bottom:-30px;
+}
+
+#description {
+    color: #fff;
+}
+
+#temp {
+    padding-top: 10px;
+    font-size: 1rem;
+    color: black;
+}
+
+#temperature p {
+    font-size: 14px;
+}
+
+#temperature h2 {
+    margin: 0;
+    font-size: 60px;
+    font-weight: 300;
+}
+
+.extra-info{
+    position: absolute;
+    bottom: 5px;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    color:#fff;
+    padding-bottom: 30px;
+
+}
+.extra-info h5{
+    font-size: 1.1rem;
+    text-transform: uppercase;
+}
+
+#info{
+    font-size: medium;
+    text-transform: uppercase;
+}
+---------------------------------------------------------------------------------------
+<!--app.js-->
+
+//c0a81f552cf9abf5566f4edef2dda73c
+
+const date = document.getElementById('date');
+const city = document.getElementById('city');
+const temp = document.getElementById('temp');
+const tempImg = document.getElementById('tempImg');
+const description = document.getElementById('description');
+const tempMax = document.getElementById('temp-max');
+const tempMin = document.getElementById('temp-min');
+
+const monthNames = ["January", "February", "March", "April", "May", "June",
+    "July", "August", "September", "October", "November", "December"
+];
+
+let dateObj = new Date();
+let month = monthNames[dateObj.getUTCMonth()];
+let day = dateObj.getUTCDate()-1;
+let year = dateObj.getUTCFullYear();
+
+date.innerHTML =`${month} ${day} ${year}`;
+
+const app = document.getElementById('app');
+
+const getWeather = async () =>{
+    try{
+        const cityName = document.getElementById("searchBarInput").value;
+        const WeatherDataFetch = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${"Enter Your Weather API"}&units=metric`,
+           { headers : {
+                Accept : "application/json"
+            }
+    });
+
+    const weatherData = await WeatherDataFetch.json();
+    console.log(weatherData)
+    city.innerHTML=`${weatherData.name}`;
+    description.innerHTML= `${weatherData.weather[0].main}`;
+    tempImg.innerHTML = `<img src="http://openweathermap.org/img/wn/${weatherData.weather[0].icon}@2x.png"/>`;
+    temp.innerHTML= `<h2>${Math.round(weatherData.main.temp)}°C</h2>`;
+    tempMax.innerHTML= `${weatherData.main.temp_max}°C`;
+    tempMin.innerHTML= `${weatherData.main.temp_min}°C`;
+    }
+    catch(error){
+        console.log(error);
+    }
+}
+getWeather();
+
+
